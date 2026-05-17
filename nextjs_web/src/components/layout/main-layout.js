@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { ModeToggle } from "../theme-toggle";
 import { Button } from "@/components/ui/button";
@@ -42,7 +43,7 @@ export default function MainLayout({ children }) {
       <nav className="sticky top-0 z-30 border-b border-border/40 bg-background/85 backdrop-blur-xl">
         <div className="mx-auto flex h-16 w-full max-w-6xl items-center justify-between gap-3 px-3 sm:px-4 lg:px-6">
           <div className="flex min-w-0 items-center gap-3">
-            <a href="/" className="flex min-w-0 items-center gap-3">
+            <Link href="/" className="flex min-w-0 items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-xl shadow-sm ring-1 ring-primary/15">
                 👶
               </div>
@@ -50,13 +51,13 @@ export default function MainLayout({ children }) {
                 <p className="truncate text-base font-semibold tracking-tight sm:text-lg">BabyLog</p>
                 <p className="hidden text-xs text-muted-foreground sm:block">记录宝宝成长的每个闪光瞬间</p>
               </div>
-            </a>
+            </Link>
             <div className="hidden md:flex md:items-center md:gap-1 lg:gap-2">
               {navItems.map((item) => {
                 const Icon = item.icon;
                 const isActive = isActiveLink(item);
                 return (
-                  <a
+                  <Link
                     key={item.href}
                     href={item.href}
                     className={cn(
@@ -66,7 +67,7 @@ export default function MainLayout({ children }) {
                   >
                     <Icon className="h-4 w-4" />
                     {item.label}
-                  </a>
+                  </Link>
                 );
               })}
             </div>
@@ -101,7 +102,7 @@ export default function MainLayout({ children }) {
                     const Icon = item.icon;
                     const isActive = isActiveLink(item);
                     return (
-                      <a
+                      <Link
                         key={item.href}
                         href={item.href}
                         className={cn(
@@ -111,7 +112,7 @@ export default function MainLayout({ children }) {
                       >
                         <Icon className="h-4 w-4" />
                         {item.label}
-                      </a>
+                      </Link>
                     );
                   })}
                 </nav>
