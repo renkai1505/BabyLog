@@ -41,7 +41,8 @@ export default function MainLayout({ children }) {
           <div className="flex min-w-0 items-center gap-3">
             <Link href="/" className="flex min-w-0 items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-xl shadow-sm ring-1 ring-primary/15">
-                <span role="img" aria-label="BabyLog 标志">👶</span>
+                <span aria-hidden="true">👶</span>
+                <span className="sr-only">BabyLog 应用标志</span>
               </div>
               <div className="min-w-0">
                 <p className="truncate text-base font-semibold tracking-tight sm:text-lg">BabyLog</p>
