@@ -3,12 +3,11 @@
 import { useEffect, useState } from "react";
 import MainLayout from "@/components/layout/main-layout";
 import { babyAPI, blogAPI } from "@/lib/api";
-import { UPLOAD_CONFIG } from "@/lib/config";
 import GrowthChart from "@/components/health/GrowthChart";
 import { Card, CardHeader, CardTitle, CardContent } from "@/components/ui/card";
-import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
+import PhotoGallery from "@/components/common/photo-gallery";
 
 export default function Home() {
   const [babies, setBabies] = useState([]);
@@ -116,32 +115,7 @@ export default function Home() {
                           <div className="text-left leading-7">
                             {memory.blog.replace(/<[^>]*>/g, '')}
                           </div>
-                          {memory.photos && memory.photos.length > 0 && (
-                            <div className="mt-3 grid grid-cols-2 md:grid-cols-3 gap-2">
-                              {memory.photos.map((photo) => (
-                                <Dialog key={photo.id}>
-                                  <DialogTrigger>
-                                    <img
-                                      src={UPLOAD_CONFIG.getFileUrl(photo.file_path)}
-                                      alt={photo.file_name}
-                                      className="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                                    />
-                                  </DialogTrigger>
-                                  <DialogContent className="max-w-4xl w-full p-0 bg-transparent border-0">
-                                    <DialogTitle className="sr-only">图片预览</DialogTitle>
-                                    <DialogDescription className="sr-only">
-                                      查看上传的图片大图，按ESC键关闭预览
-                                    </DialogDescription>
-                                    <img
-                                      src={UPLOAD_CONFIG.getFileUrl(photo.file_path)}
-                                      alt={photo.file_name}
-                                      className="w-full h-auto max-h-[90vh] object-contain"
-                                    />
-                                  </DialogContent>
-                                </Dialog>
-                              ))}
-                            </div>
-                          )}
+                          <PhotoGallery photos={memory.photos} gridClassName="mt-3 grid-cols-2 gap-2 md:grid-cols-3" />
                         </div>
                       </div>
                     );

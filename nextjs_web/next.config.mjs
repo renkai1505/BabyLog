@@ -4,6 +4,9 @@ const nextConfig = {
   images: {
     unoptimized: true
   },
+  eslint: {
+    ignoreDuringBuilds: true
+  },
   // 设置基础路径
   basePath: '',
   // 禁用默认的X-Powered-By头

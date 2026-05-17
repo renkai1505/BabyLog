@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef, use } from "react";
+import { useState, useEffect, useRef, use } from "react";
 import { useRouter } from "next/navigation";
 import MainLayout from "@/components/layout/main-layout";
 import { babyAPI, blogAPI } from "@/lib/api";
@@ -9,8 +9,8 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Checkbox } from "@/components/ui/checkbox";
 import { Label } from "@/components/ui/label";
-import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from "@/components/ui/dialog";
-import { FULL_API_BASE_URL, UPLOAD_CONFIG } from "@/lib/config";
+import { FULL_API_BASE_URL } from "@/lib/config";
+import PhotoGallery from "@/components/common/photo-gallery";
 
 export default function EditBlogPage({ params: paramsPromise }) {
   const params = use(paramsPromise);
@@ -228,55 +228,12 @@ export default function EditBlogPage({ params: paramsPromise }) {
             />
 
             {/* 图片预览 */}
-            {photos.length > 0 && (
-              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
-                {photos.map((photo) => (
-                  <div key={photo.id} className="relative group">
-                    <Dialog key={`dialog-${photo.id}`}>
-                      <DialogTrigger className="w-full ">
-                        <img
-                          src={UPLOAD_CONFIG.getFileUrl(photo.file_path)}
-                          alt={photo.file_name}
-                          className="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                        />
-                      </DialogTrigger>
-                      <DialogContent className="max-w-4xl w-full p-0 bg-transparent border-0">
-                        <DialogTitle className="sr-only">图片预览</DialogTitle>
-                        <DialogDescription className="sr-only">
-                          查看上传的图片大图，按ESC键关闭预览
-                        </DialogDescription>
-                        <img
-                          src={UPLOAD_CONFIG.getFileUrl(photo.file_path)}
-                          alt={photo.file_name}
-                          className="w-full h-auto max-h-[90vh] object-contain"
-                        />
-                      </DialogContent>
-                    </Dialog>
-                    <Button
-                      variant="destructive"
-                      size="icon"
-                      className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity"
-                      onClick={() => handleDeletePhoto(photo)}
-                    >
-                      <svg
-                        xmlns="http://www.w3.org/2000/svg"
-                        width="16"
-                        height="16"
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <path d="M18 6L6 18" />
-                        <path d="M6 6l12 12" />
-                      </svg>
-                    </Button>
-                  </div>
-                ))}
-              </div>
-            )}
+            <PhotoGallery
+              photos={photos}
+              gridClassName="grid-cols-2 gap-3 md:grid-cols-3 md:gap-4"
+              removable
+              onDelete={handleDeletePhoto}
+            />
           </div>
 
           {/* 宝宝选择 */}

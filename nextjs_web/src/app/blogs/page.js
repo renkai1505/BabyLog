@@ -6,12 +6,11 @@ import MainLayout from "@/components/layout/main-layout";
 import { blogAPI } from "@/lib/api";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogTrigger, DialogTitle, DialogDescription } from "@/components/ui/dialog";
 import { Pagination } from "@/components/ui/pagination";
 import { useToast } from "@/components/ui/use-toast";
 import { formatTimeAgo } from "@/lib/utils";
 import { Tooltip, TooltipContent, TooltipProvider, TooltipTrigger } from "@/components/ui/tooltip";
-import { UPLOAD_CONFIG } from "@/lib/config";
+import PhotoGallery from "@/components/common/photo-gallery";
 
 export default function BlogsPage() {
   const { toast } = useToast();
@@ -130,32 +129,7 @@ export default function BlogsPage() {
                   <div className="text-left leading-7">
                     {blog.blog.replace(/<[^>]*>/g, '')}
                   </div>
-                  {blog.photos && blog.photos.length > 0 && (
-                    <div className="mt-3 grid grid-cols-2 md:grid-cols-3 gap-2">
-                      {blog.photos.map((photo) => (
-                        <Dialog key={photo.id}>
-                          <DialogTrigger>
-                            <img
-                              src={UPLOAD_CONFIG.getFileUrl(photo.file_path)}
-                              alt={photo.file_name}
-                              className="w-full h-32 object-cover rounded-lg cursor-pointer hover:opacity-90 transition-opacity"
-                            />
-                          </DialogTrigger>
-                          <DialogContent className="max-w-4xl w-full p-0 bg-transparent border-0">
-                            <DialogTitle className="sr-only">图片预览</DialogTitle>
-                            <DialogDescription className="sr-only">
-                              查看上传的图片大图，按ESC键关闭预览
-                            </DialogDescription>
-                            <img
-                              src={UPLOAD_CONFIG.getFileUrl(photo.file_path)}
-                              alt={photo.file_name}
-                              className="w-full h-auto max-h-[90vh] object-contain"
-                            />
-                          </DialogContent>
-                        </Dialog>
-                      ))}
-                    </div>
-                  )}
+                  <PhotoGallery photos={blog.photos} gridClassName="mt-3 grid-cols-2 gap-2 md:grid-cols-3" />
                 </div>
               </div>
             ))}
