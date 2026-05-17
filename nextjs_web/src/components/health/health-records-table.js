@@ -96,56 +96,106 @@ export default function HealthRecordsTable({ records, onRecordsChange }) {
   return (
     <>
       <div className="overflow-hidden rounded-2xl border border-border/60 bg-card/80 shadow-sm">
-        <Table className="min-w-[620px]">
-          <TableHeader>
-            <TableRow>
-              <TableHead>宝宝</TableHead>
-              <TableHead>身高 (cm)</TableHead>
-              <TableHead>体重 (kg)</TableHead>
-              <TableHead>记录时间</TableHead>
-              <TableHead className="text-right">操作</TableHead>
-            </TableRow>
-          </TableHeader>
-          <TableBody>
-            {records
-              .slice((page - 1) * pageSize, page * pageSize)
-              .map((record) => (
-                <TableRow key={record.id}>
-                  <TableCell>{record.Baby?.name}</TableCell>
-                  <TableCell>{record.height}</TableCell>
-                  <TableCell>{record.weight}</TableCell>
-                  <TableCell>{formatDate(record.create_time)}</TableCell>
-                  <TableCell className="text-right">
-                    <div className="flex justify-end gap-2">
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-blue-500 hover:text-blue-600"
-                        onClick={() => handleEdit(record)}
-                      >
-                        编辑
-                      </Button>
-                      <Button
-                        variant="ghost"
-                        size="sm"
-                        className="text-red-500 hover:text-red-600"
-                        onClick={() => handleDelete(record.id)}
-                      >
-                        删除
-                      </Button>
-                    </div>
+        <div className="divide-y divide-border/60 md:hidden">
+          {records
+            .slice((page - 1) * pageSize, page * pageSize)
+            .map((record) => (
+              <div key={record.id} className="space-y-4 p-4">
+                <div className="space-y-3 text-sm">
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="text-muted-foreground">宝宝</span>
+                    <span className="text-right font-medium">{record.Baby?.name}</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="text-muted-foreground">身高 (cm)</span>
+                    <span className="text-right font-medium">{record.height}</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="text-muted-foreground">体重 (kg)</span>
+                    <span className="text-right font-medium">{record.weight}</span>
+                  </div>
+                  <div className="flex items-start justify-between gap-4">
+                    <span className="text-muted-foreground">记录时间</span>
+                    <span className="text-right font-medium">{formatDate(record.create_time)}</span>
+                  </div>
+                </div>
+                <div className="flex flex-col gap-2 sm:flex-row sm:justify-end">
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="w-full text-blue-500 hover:text-blue-600 sm:w-auto"
+                    onClick={() => handleEdit(record)}
+                  >
+                    编辑
+                  </Button>
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    className="w-full text-red-500 hover:text-red-600 sm:w-auto"
+                    onClick={() => handleDelete(record.id)}
+                  >
+                    删除
+                  </Button>
+                </div>
+              </div>
+            ))}
+          {records.length === 0 && (
+            <div className="py-4 text-center">暂无记录</div>
+          )}
+        </div>
+
+        <div className="hidden md:block">
+          <Table className="min-w-[620px]">
+            <TableHeader>
+              <TableRow>
+                <TableHead>宝宝</TableHead>
+                <TableHead>身高 (cm)</TableHead>
+                <TableHead>体重 (kg)</TableHead>
+                <TableHead>记录时间</TableHead>
+                <TableHead className="text-right">操作</TableHead>
+              </TableRow>
+            </TableHeader>
+            <TableBody>
+              {records
+                .slice((page - 1) * pageSize, page * pageSize)
+                .map((record) => (
+                  <TableRow key={record.id}>
+                    <TableCell>{record.Baby?.name}</TableCell>
+                    <TableCell>{record.height}</TableCell>
+                    <TableCell>{record.weight}</TableCell>
+                    <TableCell>{formatDate(record.create_time)}</TableCell>
+                    <TableCell className="text-right">
+                      <div className="flex justify-end gap-2">
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="text-blue-500 hover:text-blue-600"
+                          onClick={() => handleEdit(record)}
+                        >
+                          编辑
+                        </Button>
+                        <Button
+                          variant="ghost"
+                          size="sm"
+                          className="text-red-500 hover:text-red-600"
+                          onClick={() => handleDelete(record.id)}
+                        >
+                          删除
+                        </Button>
+                      </div>
+                    </TableCell>
+                  </TableRow>
+                ))}
+              {records.length === 0 && (
+                <TableRow>
+                  <TableCell colSpan={5} className="py-4 text-center">
+                    暂无记录
                   </TableCell>
                 </TableRow>
-              ))}
-            {records.length === 0 && (
-              <TableRow>
-                <TableCell colSpan={5} className="text-center py-4">
-                  暂无记录
-                </TableCell>
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+              )}
+            </TableBody>
+          </Table>
+        </div>
       </div>
 
       {records.length > 0 && (
@@ -160,10 +210,10 @@ export default function HealthRecordsTable({ records, onRecordsChange }) {
 
       {/* 编辑对话框 */}
       <Dialog open={!!editingRecord} onOpenChange={() => !loading && setEditingRecord(null)}>
-        <DialogContent>
-          <DialogHeader>
-            <DialogTitle>编辑健康记录</DialogTitle>
-          </DialogHeader>
+          <DialogContent className="sm:max-w-md">
+            <DialogHeader>
+              <DialogTitle>编辑健康记录</DialogTitle>
+            </DialogHeader>
           <div className="grid gap-4 py-4">
             <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-2">
@@ -190,14 +240,14 @@ export default function HealthRecordsTable({ records, onRecordsChange }) {
               </div>
             </div>
           </div>
-          <DialogFooter>
-            <Button variant="outline" onClick={() => setEditingRecord(null)} disabled={loading}>
-              取消
-            </Button>
-            <Button onClick={handleUpdate} disabled={loading}>
-              {loading ? "更新中..." : "更新"}
-            </Button>
-          </DialogFooter>
+            <DialogFooter className="gap-2 sm:gap-0">
+              <Button variant="outline" onClick={() => setEditingRecord(null)} disabled={loading} className="w-full sm:w-auto">
+                取消
+              </Button>
+              <Button onClick={handleUpdate} disabled={loading} className="w-full sm:w-auto">
+                {loading ? "更新中..." : "更新"}
+              </Button>
+            </DialogFooter>
         </DialogContent>
       </Dialog>
     </>

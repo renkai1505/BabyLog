@@ -22,14 +22,14 @@ export default function DataForm({
 
   return (
     <Dialog open={isOpen} onOpenChange={onOpenChange}>
-      <DialogContent>
+      <DialogContent className="sm:max-w-lg">
         <DialogHeader>
           <DialogTitle>{title}</DialogTitle>
           {description && (
             <DialogDescription>{description}</DialogDescription>
           )}
         </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
+        <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid gap-4">
             {fields.map((field) => (
               <div key={field.name} className="grid gap-2">
@@ -37,18 +37,19 @@ export default function DataForm({
               </div>
             ))}
           </div>
-          <DialogFooter>
+          <DialogFooter className="gap-2 sm:gap-0">
             {onCancel && (
               <Button
                 type="button"
                 variant="outline"
                 onClick={onCancel}
                 disabled={loading}
+                className="w-full sm:w-auto"
               >
                 取消
               </Button>
             )}
-            <Button type="submit" disabled={loading}>
+            <Button type="submit" disabled={loading} className="w-full sm:w-auto">
               {loading ? "处理中..." : submitLabel}
             </Button>
           </DialogFooter>
