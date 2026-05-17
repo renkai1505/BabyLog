@@ -49,7 +49,7 @@ export default function MainLayout({ children }) {
               </div>
               <div className="min-w-0">
                 <p className="truncate text-base font-semibold tracking-tight sm:text-lg">BabyLog</p>
-                <p className="hidden text-xs text-muted-foreground sm:block">记录宝宝成长的每个闪光瞬间</p>
+                <p className="hidden text-xs text-muted-foreground sm:block">记录宝宝成长的每个闪亮瞬间</p>
               </div>
             </Link>
             <div className="hidden md:flex md:items-center md:gap-1 lg:gap-2">
