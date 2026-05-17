@@ -24,10 +24,6 @@ export default function MainLayout({ children }) {
       return pathname === item.href;
     }
 
-    if (item.href === "/") {
-      return pathname === item.href;
-    }
-
     return pathname === item.href || pathname.startsWith(`${item.href}/`);
   };
 
@@ -45,7 +41,7 @@ export default function MainLayout({ children }) {
           <div className="flex min-w-0 items-center gap-3">
             <Link href="/" className="flex min-w-0 items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-primary/10 text-xl shadow-sm ring-1 ring-primary/15">
-                <span aria-hidden="true">👶</span>
+                <span role="img" aria-label="BabyLog 标志">👶</span>
               </div>
               <div className="min-w-0">
                 <p className="truncate text-base font-semibold tracking-tight sm:text-lg">BabyLog</p>
