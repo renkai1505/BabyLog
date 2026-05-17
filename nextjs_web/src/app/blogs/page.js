@@ -79,9 +79,9 @@ export default function BlogsPage() {
 
   return (
     <MainLayout>
-      <div className="max-w-4xl mx-auto">
+      <div className="mx-auto max-w-5xl">
         {/* 搜索框 */}
-        <form onSubmit={handleSearch} className="mb-6">
+        <form onSubmit={handleSearch} className="mb-6 rounded-2xl border border-border/60 bg-card/70 p-4 shadow-sm">
           <div className="flex gap-2">
             <Input
               type="text"
@@ -101,23 +101,24 @@ export default function BlogsPage() {
         ) : blogs.length > 0 ? (
           <div className="space-y-4">
             {blogs.map((blog) => (
-              <div key={blog.id} className="border rounded-lg overflow-hidden">
-                <div className="border-b p-3">
-                  <div className="flex justify-between items-center">
-                    <div className="text-sm text-gray-500 text-left">
+              <div key={blog.id} className="overflow-hidden rounded-2xl border border-border/60 bg-card/80 shadow-sm">
+                <div className="border-b border-border/60 p-4">
+                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <div className="text-left text-sm text-muted-foreground">
                       {blog.user.familymember}:在 <TooltipProvider><Tooltip><TooltipTrigger><span>{formatTimeAgo(blog.create_time)}前</span></TooltipTrigger><TooltipContent>{new Date(blog.create_time).getFullYear()}年{String(new Date(blog.create_time).getMonth() + 1).padStart(2, '0')}月{String(new Date(blog.create_time).getDate()).padStart(2, '0')}日</TooltipContent></Tooltip></TooltipProvider> 添加了一条{blog.babies && blog.babies.length > 0 ? `关于${blog.babies.map(baby => baby.name).join('、')}` : ''} 数据
                     </div>
-                    <div className="flex gap-2">
+                    <div className="flex flex-wrap gap-2">
                       <Button
-                      variant="link"
+                        variant="outline"
                         size="sm"
                         onClick={() => router.push(`/blogs/edit/${blog.id}`)}
                       >
                         编辑
                       </Button>
                       <Button
-                        variant="link"
+                        variant="outline"
                         size="sm"
+                        className="text-red-500 hover:text-red-600"
                         onClick={() => handleDelete(blog.id)}
                       >
                         删除
@@ -125,8 +126,8 @@ export default function BlogsPage() {
                     </div>
                   </div>
                 </div>
-                <div className="p-3">
-                  <div className=" text-left">
+                <div className="p-4">
+                  <div className="text-left leading-7">
                     {blog.blog.replace(/<[^>]*>/g, '')}
                   </div>
                   {blog.photos && blog.photos.length > 0 && (

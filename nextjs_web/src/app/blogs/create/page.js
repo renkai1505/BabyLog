@@ -192,8 +192,9 @@ export default function CreateBlogPage() {
 
   return (
     <MainLayout>
-      <div className="max-w-4xl mx-auto p-6">
-        <h1 className="text-2xl font-bold mb-6">创建新日志</h1>
+      <div className="mx-auto max-w-5xl rounded-[28px] border border-border/60 bg-card/75 p-4 shadow-sm sm:p-6">
+        <h1 className="mb-2 text-2xl font-bold tracking-tight">创建新日志</h1>
+        <p className="mb-6 text-sm text-muted-foreground">用图文记录当下，把珍贵时刻慢慢留住。</p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* 图片上传区域 */}
@@ -210,7 +211,7 @@ export default function CreateBlogPage() {
 
             {/* 图片预览 */}
             {photos.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
                 {photos.map((photo, index) => (
                   <Dialog key={`dialog-${photo.id || index}`}>
                     <DialogTrigger>
@@ -240,7 +241,7 @@ export default function CreateBlogPage() {
           {/* 宝宝选择 */}
           <div className="space-y-4">
             <Label>选择关联的宝宝</Label>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
               {babies.map((baby) => (
                 <div key={baby.id} className="flex items-center space-x-2">
                   <Checkbox
@@ -273,11 +274,11 @@ export default function CreateBlogPage() {
 
           {error && <div className="text-red-500">{error}</div>}
 
-          <div className="flex justify-between">
+          <div className="flex flex-col-reverse gap-3 sm:flex-row sm:justify-between">
             <Button
               type="submit"
               disabled={loading || uploading}
-              className="flex-1 mr-2"
+              className="w-full flex-1"
             >
               {loading ? "保存中..." : "保存日志"}
             </Button>
@@ -285,7 +286,7 @@ export default function CreateBlogPage() {
               type="button"
               variant="outline"
               onClick={handleConfirmLeave}
-              className="flex-1 ml-2"
+              className="w-full flex-1"
             >
               取消并离开
             </Button>

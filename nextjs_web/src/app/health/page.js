@@ -77,10 +77,13 @@ export default function HealthPage() {
 
   return (
     <MainLayout>
-      <div className="max-w-4xl mx-auto p-6">
-        <div className="flex justify-between items-center mb-6">
-          <h1 className="text-2xl font-bold">健康记录</h1>
-          <Button onClick={() => setIsCreateDialogOpen(true)}>添加记录</Button>
+      <div className="mx-auto max-w-5xl space-y-6">
+        <div className="flex flex-col gap-4 rounded-[28px] border border-border/60 bg-card/75 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-6">
+          <div>
+            <h1 className="text-2xl font-bold tracking-tight">健康记录</h1>
+            <p className="mt-1 text-sm text-muted-foreground">随时查看宝宝的身高、体重变化。</p>
+          </div>
+          <Button onClick={() => setIsCreateDialogOpen(true)} className="w-full sm:w-auto">添加记录</Button>
         </div>
 
         {/* 记录列表筛选 */}
@@ -96,7 +99,7 @@ export default function HealthPage() {
           onRecordsChange={refreshHealthRecords}
         />
 
-        {error && <div className="text-red-500 mt-4">{error}</div>}
+        {error && <div className="mt-4 text-red-500">{error}</div>}
 
         {/* 添加记录对话框 */}
         <Dialog open={isCreateDialogOpen} onOpenChange={setIsCreateDialogOpen}>

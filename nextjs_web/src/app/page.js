@@ -50,11 +50,13 @@ export default function Home() {
 
   return (
     <MainLayout>
-      <div className="flex flex-col items-center justify-center min-h-[60vh] text-center max-w-4xl mx-auto">
-        <h1 className="text-4xl font-bold mb-4">欢迎使用 BabyLog</h1>
-        <p className="text-lg text-gray-600 dark:text-gray-400 mb-8">
-          记录您宝宝的每一个精彩时刻
-        </p>
+      <div className="mx-auto flex min-h-[60vh] max-w-5xl flex-col justify-center gap-6">
+        <div className="rounded-[28px] border border-primary/10 bg-gradient-to-br from-primary/10 via-background to-background px-5 py-8 text-center shadow-sm sm:px-8">
+          <h1 className="text-3xl font-bold tracking-tight sm:text-4xl">欢迎使用 BabyLog</h1>
+          <p className="mt-3 text-sm text-muted-foreground sm:text-base">
+            记录您宝宝的每一个精彩时刻，把成长里的爱与惊喜慢慢珍藏起来。
+          </p>
+        </div>
 
         {loading ? (
           <div className="text-center py-4">加载中...</div>
@@ -64,7 +66,7 @@ export default function Home() {
           <>
             {/* 宝宝信息 */}
             {babies.length > 0 ? (
-              <div className="grid grid-cols-1 gap-4 mb-8 max-w-5xl mx-auto w-full">
+              <div className="grid w-full grid-cols-1 gap-4">
                 {babies.map((baby) => {
                   const birthDate = new Date(baby.birthday);
                   const today = new Date();
@@ -73,12 +75,12 @@ export default function Home() {
                   const ageInYears = Math.floor(ageInDays / 365);
 
                   return (
-                    <Card key={baby.id}>
-                      <CardHeader>
-                        <CardTitle>Baby: {baby.name}</CardTitle>
+                    <Card key={baby.id} className="overflow-hidden rounded-[24px] border-border/60 bg-card/85 shadow-sm">
+                      <CardHeader className="pb-4">
+                        <CardTitle className="text-xl sm:text-2xl">Baby: {baby.name}</CardTitle>
                       </CardHeader>
-                      <CardContent>
-                        <div className="text-gray-600 dark:text-gray-400 space-y-1">
+                      <CardContent className="space-y-4">
+                        <div className="space-y-2 text-sm text-muted-foreground sm:text-base">
                           <p>出生于: {baby.birthday}, 年龄: {ageInYears}岁</p>
                           <p>您的孩纸已经出生: {ageInDays}天</p>
                           <p>系统中共有{baby.records_count || 0}条关于ta的记录</p>
@@ -90,28 +92,28 @@ export default function Home() {
                 })}
               </div>
             ) : (
-              <div className="text-left py-4 mb-8">暂无宝宝信息</div>
-            )}
+                <div className="rounded-2xl border border-dashed border-border/70 bg-card/60 px-4 py-8 text-left">暂无宝宝信息</div>
+              )}
 
             {/* 往年今日 */}
-            <div className="w-full mb-8">
-              <h2 className="text-2xl font-semibold mb-4 text-left">往年今日</h2>
+              <div className="w-full mb-8">
+              <h2 className="mb-4 text-left text-2xl font-semibold tracking-tight">往年今日</h2>
               {memories && memories.length > 0 ? (
                 <div className="space-y-4">
                   {memories.map((memory) => {
                     const postDate = new Date(memory.create_time);
                     const yearsAgo = !isNaN(postDate.getTime()) ? new Date().getFullYear() - postDate.getFullYear() : 0;
                     return (
-                      <div key={memory.id} className=" border rounded-lg overflow-hidden">
-                        <div className=" border-b p-3">
-                          <div className=" flex justify-between items-center">
-                            <div className=" text-sm text-gray-500 text-left">
+                      <div key={memory.id} className="overflow-hidden rounded-2xl border border-border/60 bg-card/80 shadow-sm">
+                        <div className="border-b border-border/60 p-4">
+                          <div className="flex items-start justify-between gap-3">
+                            <div className="text-left text-sm text-muted-foreground">
                               {memory.user.familymember}:在 <TooltipProvider><Tooltip><TooltipTrigger><span>{yearsAgo}年前</span></TooltipTrigger><TooltipContent>{postDate.getFullYear()}年{String(postDate.getMonth() + 1).padStart(2, '0')}月{String(postDate.getDate()).padStart(2, '0')}日</TooltipContent></Tooltip></TooltipProvider> 添加了一条{memory.babies && memory.babies.length > 0 ? `关于${memory.babies.map(baby => baby.name).join('、')}` : ''} 数据
                             </div>
                           </div>
                         </div>
-                        <div className=" p-3">
-                          <div className=" text-left">
+                        <div className="p-4">
+                          <div className="text-left leading-7">
                             {memory.blog.replace(/<[^>]*>/g, '')}
                           </div>
                           {memory.photos && memory.photos.length > 0 && (
@@ -146,8 +148,8 @@ export default function Home() {
                   })}
                 </div>
               ) : (
-                <div className="text-center py-8 border rounded-lg">
-                  <p className="text-gray-600 dark:text-gray-400 mb-4">往年的今天还没有数据，不如现在添加一条吧！</p>
+                <div className="rounded-2xl border border-dashed border-border/70 bg-card/60 px-4 py-10 text-center">
+                  <p className="mb-4 text-sm text-muted-foreground sm:text-base">往年的今天还没有数据，不如现在添加一条吧！</p>
                   <Button 
                     onClick={() => window.location.href = '/blogs/create'}
                     className="bg-primary hover:bg-primary/90"

@@ -71,10 +71,24 @@
 
 
 @layer base {
+  html {
+    @apply scroll-smooth;
+  }
+
   * {
     @apply border-border outline-ring/50;
   }
+
   body {
-    @apply bg-background text-foreground;
+    @apply min-h-screen bg-background text-foreground;
+    background-image:
+      radial-gradient(circle at top, hsl(var(--primary) / 0.14), transparent 32%),
+      radial-gradient(circle at bottom, hsl(var(--chart-2) / 0.12), transparent 26%);
+    background-attachment: fixed;
+  }
+
+  ::selection {
+    background: hsl(var(--primary) / 0.2);
+    color: hsl(var(--foreground));
   }
 }

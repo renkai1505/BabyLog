@@ -95,8 +95,8 @@ export default function HealthRecordsTable({ records, onRecordsChange }) {
 
   return (
     <>
-      <div className="border rounded-lg overflow-hidden">
-        <Table>
+      <div className="overflow-hidden rounded-2xl border border-border/60 bg-card/80 shadow-sm">
+        <Table className="min-w-[620px]">
           <TableHeader>
             <TableRow>
               <TableHead>宝宝</TableHead>
@@ -116,25 +116,27 @@ export default function HealthRecordsTable({ records, onRecordsChange }) {
                   <TableCell>{record.weight}</TableCell>
                   <TableCell>{formatDate(record.create_time)}</TableCell>
                   <TableCell className="text-right">
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-blue-500 hover:text-blue-600 mr-2"
-                      onClick={() => handleEdit(record)}
-                    >
-                      编辑
-                    </Button>
-                    <Button
-                      variant="ghost"
-                      size="sm"
-                      className="text-red-500 hover:text-red-600"
-                      onClick={() => handleDelete(record.id)}
-                    >
-                      删除
-                    </Button>
+                    <div className="flex justify-end gap-2">
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-blue-500 hover:text-blue-600"
+                        onClick={() => handleEdit(record)}
+                      >
+                        编辑
+                      </Button>
+                      <Button
+                        variant="ghost"
+                        size="sm"
+                        className="text-red-500 hover:text-red-600"
+                        onClick={() => handleDelete(record.id)}
+                      >
+                        删除
+                      </Button>
+                    </div>
                   </TableCell>
                 </TableRow>
-            ))}
+              ))}
             {records.length === 0 && (
               <TableRow>
                 <TableCell colSpan={5} className="text-center py-4">
@@ -163,7 +165,7 @@ export default function HealthRecordsTable({ records, onRecordsChange }) {
             <DialogTitle>编辑健康记录</DialogTitle>
           </DialogHeader>
           <div className="grid gap-4 py-4">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
               <div className="space-y-2">
                 <Label htmlFor="edit-height">身高 (cm)</Label>
                 <Input

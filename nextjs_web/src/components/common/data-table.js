@@ -25,8 +25,8 @@ export default function DataTable({
   }
 
   return (
-    <div className="border rounded-lg overflow-hidden">
-      <Table className="w-full">
+    <div className="overflow-hidden rounded-2xl border border-border/60 bg-card/80 shadow-sm">
+      <Table className="min-w-[640px] w-full">
         <TableHeader>
           <TableRow>
             {columns.map((column) => (
@@ -55,16 +55,19 @@ export default function DataTable({
               ))}
               {actions && (
                 <TableCell className="whitespace-nowrap text-right">
-                  {actions.map((action, index) => (
-                    <Button
-                      key={action.label}
-                      variant={action.variant || "ghost"}
-                      className={`${index > 0 ? "ml-2" : ""} ${action.className || ""}`}
-                      onClick={() => action.onClick(item)}
-                    >
-                      {action.label}
-                    </Button>
-                  ))}
+                  <div className="flex justify-end gap-2">
+                    {actions.map((action) => (
+                      <Button
+                        key={action.label}
+                        variant={action.variant || "ghost"}
+                        size="sm"
+                        className={action.className || ""}
+                        onClick={() => action.onClick(item)}
+                      >
+                        {action.label}
+                      </Button>
+                    ))}
+                  </div>
                 </TableCell>
               )}
             </TableRow>

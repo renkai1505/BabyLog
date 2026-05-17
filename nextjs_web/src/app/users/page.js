@@ -363,17 +363,20 @@ export default function UsersPage() {
 
   return (
     <MainLayout>
-      <div className="max-w-4xl mx-auto p-6">
+      <div className="mx-auto max-w-5xl">
         <Tabs value={activeTab} onValueChange={setActiveTab} className="w-full">
-          <TabsList className="grid w-full grid-cols-2">
+          <TabsList className="grid h-auto w-full grid-cols-2 rounded-2xl bg-muted/70 p-1">
             <TabsTrigger value="users">用户管理</TabsTrigger>
             <TabsTrigger value="babies">宝贝管理</TabsTrigger>
           </TabsList>
 
           <TabsContent value="users">
-            <div className="flex justify-between items-center mb-6">
-              <h1 className="text-2xl font-bold">用户管理</h1>
-              <Button onClick={() => setIsCreateUserDialogOpen(true)}>添加用户</Button>
+            <div className="mb-6 mt-6 flex flex-col gap-4 rounded-[28px] border border-border/60 bg-card/75 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-6">
+              <div>
+                <h1 className="text-2xl font-bold tracking-tight">用户管理</h1>
+                <p className="mt-1 text-sm text-muted-foreground">管理家人账号与基础信息。</p>
+              </div>
+              <Button onClick={() => setIsCreateUserDialogOpen(true)} className="w-full sm:w-auto">添加用户</Button>
             </div>
 
             <DataTable
@@ -441,9 +444,12 @@ export default function UsersPage() {
           </TabsContent>
 
           <TabsContent value="babies">
-            <div className="flex justify-between items-center mb-6">
-              <h1 className="text-2xl font-bold">宝贝管理</h1>
-              <Button onClick={() => setIsCreateBabyDialogOpen(true)}>添加宝贝</Button>
+            <div className="mb-6 mt-6 flex flex-col gap-4 rounded-[28px] border border-border/60 bg-card/75 p-4 shadow-sm sm:flex-row sm:items-center sm:justify-between sm:p-6">
+              <div>
+                <h1 className="text-2xl font-bold tracking-tight">宝贝管理</h1>
+                <p className="mt-1 text-sm text-muted-foreground">维护宝宝档案，方便后续记录与筛选。</p>
+              </div>
+              <Button onClick={() => setIsCreateBabyDialogOpen(true)} className="w-full sm:w-auto">添加宝贝</Button>
             </div>
 
             <DataTable

@@ -17,12 +17,13 @@ export function Pagination({ page, total, onPageChange }) {
   const visiblePages = pages.slice(startPage - 1, endPage);
 
   return (
-    <nav className="flex items-center space-x-2" aria-label="Pagination">
+    <nav className="flex flex-wrap items-center justify-center gap-1.5 sm:gap-2" aria-label="Pagination">
       <Button
         variant="outline"
         size="icon"
         onClick={() => onPageChange(Math.max(1, page - 1))}
         disabled={page === 1}
+        className="h-9 w-9 rounded-full sm:h-10 sm:w-10"
       >
         <span className="sr-only">上一页</span>
         <svg
@@ -47,6 +48,7 @@ export function Pagination({ page, total, onPageChange }) {
             variant={page === 1 ? "secondary" : "outline"}
             size="icon"
             onClick={() => onPageChange(1)}
+            className="h-9 w-9 rounded-full sm:h-10 sm:w-10"
           >
             1
           </Button>
@@ -62,6 +64,8 @@ export function Pagination({ page, total, onPageChange }) {
           variant={page === pageNum ? "secondary" : "outline"}
           size="icon"
           onClick={() => onPageChange(pageNum)}
+          className="h-9 w-9 rounded-full sm:h-10 sm:w-10"
+          aria-current={page === pageNum ? "page" : undefined}
         >
           {pageNum}
         </Button>
@@ -76,6 +80,7 @@ export function Pagination({ page, total, onPageChange }) {
             variant={page === total ? "secondary" : "outline"}
             size="icon"
             onClick={() => onPageChange(total)}
+            className="h-9 w-9 rounded-full sm:h-10 sm:w-10"
           >
             {total}
           </Button>
@@ -87,6 +92,7 @@ export function Pagination({ page, total, onPageChange }) {
         size="icon"
         onClick={() => onPageChange(Math.min(total, page + 1))}
         disabled={page === total}
+        className="h-9 w-9 rounded-full sm:h-10 sm:w-10"
       >
         <span className="sr-only">下一页</span>
         <svg

@@ -7,6 +7,7 @@ import { Label } from "@/components/ui/label";
 import { RadioGroup, RadioGroupItem } from "@/components/ui/radio-group";
 import { useToast } from "@/components/ui/use-toast";
 import { healthAPI } from "@/lib/api";
+import { cn } from "@/lib/utils";
 
 export default function AddHealthRecordForm({ babies, onSuccess }) {
   const { toast } = useToast();
@@ -77,10 +78,16 @@ export default function AddHealthRecordForm({ babies, onSuccess }) {
           <RadioGroup
             value={selectedBaby}
             onValueChange={setSelectedBaby}
-            className="grid grid-cols-2 md:grid-cols-3 gap-4"
+            className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3"
           >
             {babies.map((baby) => (
-              <div key={baby.id} className="flex items-center space-x-2">
+              <div
+                key={baby.id}
+                className={cn(
+                  "flex items-center space-x-3 rounded-2xl border border-border/60 bg-background/80 px-4 py-3 transition-colors",
+                  String(selectedBaby) === String(baby.id) && "border-primary/30 bg-primary/5 shadow-sm"
+                )}
+              >
                 <RadioGroupItem value={baby.id} id={`baby-${baby.id}`} />
                 <Label htmlFor={`baby-${baby.id}`}>{baby.name}</Label>
               </div>
@@ -88,7 +95,7 @@ export default function AddHealthRecordForm({ babies, onSuccess }) {
           </RadioGroup>
         </div>
 
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
           <div className="space-y-2">
             <Label htmlFor="height">身高 (cm)</Label>
             <Input

@@ -210,8 +210,9 @@ export default function EditBlogPage({ params: paramsPromise }) {
 
   return (
     <MainLayout>
-      <div className="max-w-4xl mx-auto p-6">
-        <h1 className="text-2xl font-bold mb-6">编辑日志</h1>
+      <div className="mx-auto max-w-5xl rounded-[28px] border border-border/60 bg-card/75 p-4 shadow-sm sm:p-6">
+        <h1 className="mb-2 text-2xl font-bold tracking-tight">编辑日志</h1>
+        <p className="mb-6 text-sm text-muted-foreground">调整内容、照片与关联宝宝，让记录更完整。</p>
 
         <form onSubmit={handleSubmit} className="space-y-6">
           {/* 图片上传区域 */}
@@ -228,7 +229,7 @@ export default function EditBlogPage({ params: paramsPromise }) {
 
             {/* 图片预览 */}
             {photos.length > 0 && (
-              <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-3 md:gap-4">
                 {photos.map((photo) => (
                   <div key={photo.id} className="relative group">
                     <Dialog key={`dialog-${photo.id}`}>
@@ -281,7 +282,7 @@ export default function EditBlogPage({ params: paramsPromise }) {
           {/* 宝宝选择 */}
           <div className="space-y-4">
             <Label>选择关联的宝宝</Label>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-3">
               {babies.map((baby) => (
                 <div key={baby.id} className="flex items-center space-x-2">
                   <Checkbox
@@ -314,12 +315,12 @@ export default function EditBlogPage({ params: paramsPromise }) {
 
           {error && <div className="text-red-500">{error}</div>}
 
-          <div className="flex gap-4">
+          <div className="flex flex-col-reverse gap-3 sm:flex-row">
             <Button
               type="submit"
               variant="outline"
               disabled={loading || uploading}
-              className="flex-1"
+              className="w-full flex-1"
             >
               {loading ? "保存中..." : "保存修改"}
             </Button>
@@ -327,7 +328,7 @@ export default function EditBlogPage({ params: paramsPromise }) {
               type="button"
               variant="outline"
               onClick={handleCancel}
-              className="flex-1"
+              className="w-full flex-1"
             >
               取消
             </Button>
