@@ -82,7 +82,7 @@ export default function Home() {
                       <CardContent className="space-y-4">
                         <div className="space-y-2 text-sm text-muted-foreground sm:text-base">
                           <p>出生于: {baby.birthday}, 年龄: {ageInYears}岁</p>
-                          <p>您的孩纸已经出生: {ageInDays}天</p>
+                          <p>您的孩子已经出生: {ageInDays}天</p>
                           <p>系统中共有{baby.records_count || 0}条关于ta的记录</p>
                         </div>
                       </CardContent>
